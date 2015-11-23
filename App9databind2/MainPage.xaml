@@ -1,0 +1,57 @@
+﻿<Page
+    x:Class="App9databind2.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App9databind2"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="myDataTemplate">
+            <StackPanel Margin="2,4,2,4" Tapped="StackPanel_Tapped">
+                <TextBlock Text="{Binding Path=breed}" 
+                                       Style="{StaticResource TitleTextBlockStyle}" />
+                <TextBlock Text="{Binding Path=origin}" 
+                                       Style="{StaticResource SubtitleTextBlockStyle}" />
+            </StackPanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel HorizontalAlignment="Left" Width="300">
+            <TextBlock Text="Dog Breeds" HorizontalAlignment="Center" 
+                   Style="{StaticResource TitleTextBlockStyle}"
+                   x:Name="tblTitle" />
+            <ListView x:Name="lvDogs" BorderBrush="Blue" BorderThickness="3"
+                      Height="420"
+                      ItemTemplate="{StaticResource myDataTemplate}">
+            </ListView>
+        </StackPanel>
+
+        <FlyoutPresenter Width="200" x:Name="fpFlyoutDetails"
+                         Visibility="Collapsed" Margin="160,61,0,283"
+                         Tapped="FlyoutPresenter_Tapped">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Breed: " Margin="2,1,2,1" />
+                    <TextBlock x:Name="tblBreed" Text="TextBlock" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Category: " Margin="2,1,2,1" />
+                    <TextBlock x:Name="tblCategory" Text="TextBlock" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Grooming: " Margin="2,1,2,1" />
+                    <TextBlock x:Name="tblGrooming" Text="TextBlock" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" >
+                    <TextBlock Text="Activity: " Margin="2,1,2,1" />
+                    <TextBlock x:Name="tblActivity" Text="TextBlock" />
+                </StackPanel>
+
+            </StackPanel>
+        </FlyoutPresenter>
+
+    </Grid>
+</Page>
