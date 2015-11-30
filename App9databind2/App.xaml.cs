@@ -22,6 +22,11 @@ namespace App9databind2
     /// </summary>
     sealed partial class App : Application
     {
+        // global string
+        public string myTitle = "Hello Dog World";
+        public List<clsDog> _globalList = new List<clsDog>();
+
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -64,6 +69,7 @@ namespace App9databind2
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
+                    // read all my settings
                 }
 
                 // Place the frame in the current Window

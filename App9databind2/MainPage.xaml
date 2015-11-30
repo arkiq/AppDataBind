@@ -12,9 +12,12 @@
             <StackPanel Margin="2,4,2,4" Tapped="StackPanel_Tapped">
                 <TextBlock Text="{Binding Path=breed}" 
                                        Style="{StaticResource TitleTextBlockStyle}" />
-                <TextBlock Text="{Binding Path=origin}" 
+                <TextBlock Text="{Binding Path=grooming}" 
                                        Style="{StaticResource SubtitleTextBlockStyle}" />
             </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="myLargeDataTemplate640x480">
+            
         </DataTemplate>
     </Page.Resources>
 
@@ -23,35 +26,46 @@
             <TextBlock Text="Dog Breeds" HorizontalAlignment="Center" 
                    Style="{StaticResource TitleTextBlockStyle}"
                    x:Name="tblTitle" />
-            <ListView x:Name="lvDogs" BorderBrush="Blue" BorderThickness="3"
+            <ListView x:Name="lvDogs" 
+                      BorderBrush="Blue" BorderThickness="3"
                       Height="420"
                       ItemTemplate="{StaticResource myDataTemplate}">
             </ListView>
         </StackPanel>
 
-        <FlyoutPresenter Width="200" x:Name="fpFlyoutDetails"
-                         Visibility="Collapsed" Margin="160,61,0,283"
+        <FlyoutPresenter Background="Gray" Opacity="0.7" Width="300"
+                         Height="120" x:Name="fpFlyoutDetails"
+                         Visibility="Visible" Margin="10"
+                         HorizontalAlignment="Right"
+                         VerticalAlignment="Center" 
                          Tapped="FlyoutPresenter_Tapped">
-            <StackPanel>
-                <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Breed: " Margin="2,1,2,1" />
-                    <TextBlock x:Name="tblBreed" Text="TextBlock" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Category: " Margin="2,1,2,1" />
-                    <TextBlock x:Name="tblCategory" Text="TextBlock" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Grooming: " Margin="2,1,2,1" />
-                    <TextBlock x:Name="tblGrooming" Text="TextBlock" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" >
-                    <TextBlock Text="Activity: " Margin="2,1,2,1" />
-                    <TextBlock x:Name="tblActivity" Text="TextBlock" />
+            <StackPanel Orientation="Horizontal" >
+                <Image x:Name="imgOne" Height="85" Width="85"
+                       Margin="3"/>
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Breed: " Margin="2,1,2,1" />
+                        <TextBlock x:Name="tblBreed" Text="TextBlock" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Category: " Margin="2,1,2,1" />
+                        <TextBlock x:Name="tblCategory" Text="TextBlock" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Grooming: " Margin="2,1,2,1" />
+                        <TextBlock x:Name="tblGrooming" Text="TextBlock" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" >
+                        <TextBlock Text="Activity: " Margin="2,1,2,1" />
+                        <TextBlock x:Name="tblActivity" Text="TextBlock" />
+                    </StackPanel>
                 </StackPanel>
 
             </StackPanel>
         </FlyoutPresenter>
 
+        <Button x:Name="btnNext" Content="Next Page"
+                HorizontalAlignment="Right" VerticalAlignment="Top"
+                Margin="10" Click="btnNext_Click" />
     </Grid>
 </Page>

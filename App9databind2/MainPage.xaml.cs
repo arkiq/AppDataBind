@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -27,16 +28,23 @@ namespace App9databind2
     {
         // create list
         List<clsDog> _mylist;
+       
 
         public MainPage()
         {
             this.InitializeComponent();
             // add event handler for loading the page
-            this.Loaded += MainPage_Loaded;
+            //this.Loaded += MainPage_Loaded;
+         
         }
 
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            // get the global string
+            // like fptr in c.  myapp is like a file pointer
+            App myapp = (Application.Current) as App;
+            tblTitle.Text = myapp.myTitle;
+
             // if the list is already full, exit
             if (_mylist != null)
                 return;
@@ -46,7 +54,8 @@ namespace App9databind2
 
             // otherwise, fill the list.
             loadLocalData();
-            tblTitle.Text = _mylist.Count().ToString() + " Dog Breeds";
+            //tblTitle.Text = _mylist.Count().ToString() + " Dog Breeds";
+            // binds the list to the listview
             lvDogs.ItemsSource = _mylist;
         }
 
@@ -122,6 +131,25 @@ namespace App9databind2
             tblCategory.Text = _mylist[lvDogs.SelectedIndex].category;
             tblGrooming.Text = _mylist[lvDogs.SelectedIndex].grooming;
 
+            // add an image using a default if it doesn't exist.
+            string imageFileName = "ms-appx:///Images/images.jpe";
+            // need the images in a folder
+            // create a uri with a path to the image
+            // ms-appx:///Images/cairn.jpg
+            // check if the image selected exists.
+            // Images/filename.jpg
+            if (File.Exists(_mylist[lvDogs.SelectedIndex].imgBreed))
+            {
+                imageFileName = "ms-appx:///" +
+                _mylist[lvDogs.SelectedIndex].imgBreed;
+            }
+
+            Uri myuri = new Uri(imageFileName, UriKind.Absolute);
+            // create a bitmap image with that uri
+            BitmapImage myBitmap = new BitmapImage(myuri);
+            // set the source of imgOne to the bitmap.
+            imgOne.Source = myBitmap;
+
             fpFlyoutDetails.Visibility = Visibility.Visible;
 
         }
@@ -134,6 +162,12 @@ namespace App9databind2
                 curr.Visibility = Visibility.Collapsed;
             }
 
+        }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+            // goto the next page.
+            this.Frame.Navigate(typeof(Page2));
         }
     }
 }
